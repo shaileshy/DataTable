@@ -1,0 +1,42 @@
+.top{
+    color:darkslateblue;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.tableContent{
+    background-color: darkgrey;
+    pading:20px;
+}
+table{
+    width: 100%;
+}
+input{
+    width: 98.5%;
+}
+button{
+    width:100%;
+}
+select{
+    width: 100%;
+}
+table,tr,th,td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th:first-child{
+    width: 10%;
+}
+th{
+   width: 20%;
+}
+
+
+.submit,.edit,.remove{
+    width: 50%;
+ }
+/*
+tr{
+    background-color:black;
+    color:white;
+}*/
