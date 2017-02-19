@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function(){
-
+//add new row
     $("#new").click(function(){
         var name = $(".name").clear;
         var rollno = $(".rollno").clear;
@@ -15,10 +15,11 @@ $(document).ready(function(){
         $("tbody#some").append(addRow);
     });
 
-
+//delete single row
     $(document).on('click','.remove',function(e) {
+        debugger;
         var currentrow = $(e.target).closest('tr');
-        var valIndex = $(e.target).closest('tr').index();
+        var valIndex = currentrow.index();
 
         /* if($(".select").val()=="check"){
          /!* $("currentrow").remove();*!/*/
@@ -26,10 +27,18 @@ $(document).ready(function(){
         var confresult = confirm("Do you really want to delete row ?");
         if (confresult == true) {
             currentrow.remove();
-            var removeIteam = jsondata[valIndex];
+
+
+
+           jsondata.splice(valIndex,1);
+            localStorage.setItem('jsondata',JSON.stringify(jsondata));
+
+           /* var removeIteam = jsondata[valIndex];
             jsondata = $.grep(jsondata, function (value) {
                 return value != removeIteam;
-            })
+            })*/
+
+
             alert("you deleted row successfully");
         }
         else{
@@ -37,23 +46,25 @@ $(document).ready(function(){
         }
 
     })
+//delete multiple row
     $(document).on('click','.multdel',function(e){
+        debugger;
         var confresult = confirm("Do you really want to delete row ?");
 
         if(confresult === true) {
             $("table tbody").find("input.select").each(function () {
             if($(this).is (":checked")){
+                var valIndex = $(this).closest('tr').index();
                 $(this).parents("tr").remove();
-                   $(this).parents("tr").remove();
+                jsondata.splice(valIndex,1);
 
-                    jsondata = $.grep(jsondata, function (value) {
-                        return value != removeIteam;
-                    })
                 }
         });
+            localStorage.setItem('jsondata',JSON.stringify(jsondata));
+
         }
     });
-
+//save button click
     $(document).on('click', '.submit',function(e) {
 
         var currentrow = $(e.target).closest('tr');
@@ -82,7 +93,7 @@ $(document).ready(function(){
                      "<td><button class='edit'>Edit</button><button class='remove'>Delete</button><button class='submit' style='display: none'>save</button> </td></tr>";
         currentrow.replaceWith(addRow);
     });
-
+//click on Edit
     $(document).on('click', '.edit',function(e){
         $('#delete').show();
         var currentrow = $(e.target).closest('tr');
@@ -99,7 +110,7 @@ $(document).ready(function(){
         currentrow.replaceWith(addRow);
         $('.sex').val(sex1);
     });
-
+//local storage
     var jsondata=[];
     if(localStorage.getItem('jsondata')){
         jsondata = JSON.parse(localStorage.getItem('jsondata'));
